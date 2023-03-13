@@ -36,7 +36,7 @@ const AddClientModal = () => {
     <>
       <button
         type="button"
-        className="btn btn-primary"
+        className="btn btn-sm btn-primary"
         data-bs-toggle="modal"
         data-bs-target="#addClientModal"
       >

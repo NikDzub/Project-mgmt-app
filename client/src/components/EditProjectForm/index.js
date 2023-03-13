@@ -1,79 +1,58 @@
 import React from 'react';
 
-import { useState } from 'react';
-
-import { useMutation } from '@apollo/client';
-import { useQuery } from '@apollo/client';
-import { GET_CLIENTS } from '../../queries/clientQueries';
-import { GET_PROJECTS } from '../../queries/projectQueries';
-import { ADD_PROJECT } from '../../mutations/projectMutations';
-
 import { FaList } from 'react-icons/fa';
-import Spinner from '../Spinner';
 
-const AddProjectModal = () => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { UPDATE_PROJECT } from '../../mutations/projectMutations';
+import { GET_PROJECT } from '../../queries/projectQueries';
+
+const EditProjectForm = ({ project }) => {
+  const [name, setName] = useState(project.name);
+  const [description, setDescription] = useState(project.description);
   const [status, setStatus] = useState('new');
-  const [clientId, setClientId] = useState('');
 
-  //Get clients for select
-  const { loading, error, data } = useQuery(GET_CLIENTS);
-
-  const [addProject] = useMutation(ADD_PROJECT, {
-    variables: { name, description, status, clientId },
-    refetchQueries: [{ query: GET_PROJECTS }],
+  const [updateProject] = useMutation(UPDATE_PROJECT, {
+    variables: { id: project.id, name, description, status },
+    // refetchQueries: [{ query: GET_PROJECT, variables: { id: project.id } }],
   });
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (name !== '' && description !== '' && status !== '' && clientId !== '') {
-      addProject(name, description, status, clientId);
-
-      setName('');
-      setDescription('');
-      setStatus('new');
-      setClientId('');
-    } else {
-      alert('Please fill in all fields');
+    if (!name && !description && !status) {
+      return alert('Please fill in all fields');
     }
+
+    updateProject(name, description, status);
   };
-
-  if (loading) {
-    return null;
-  }
-
-  if (error) {
-    return <p>Something went wrong</p>;
-  }
 
   return (
     <>
       <button
         type="button"
-        className="btn btn-sm btn-primary"
+        className="btn btn-primary btn-sm w-25 align-text-center mt-2"
         data-bs-toggle="modal"
-        data-bs-target="#AddProjectModal"
+        data-bs-target="#EditProjectModal"
       >
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center justify-content-center">
           <FaList style={{ marginRight: '5px' }}></FaList>
-          <div>Add Project</div>
+          <div>Edit</div>
         </div>
       </button>
 
       <div
         className="modal fade"
-        id="AddProjectModal"
+        id="EditProjectModal"
         tabIndex="-1"
-        aria-labelledby="AddProjectModalLabel"
+        aria-labelledby="EditProjectModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="AddProjectModalLabel">
-                New Project
+              <h1 className="modal-title fs-5" id="EditProjectModalLabel">
+                {project.name}
               </h1>
               <button
                 type="button"
@@ -121,28 +100,7 @@ const AddProjectModal = () => {
                   >
                     <option value="new">Not Started</option>
                     <option value="progress">In Progress</option>
-                    <option value="complete">Completed</option>
-                  </select>
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label">Client</label>
-                  <select
-                    className="form-select"
-                    id="clientId"
-                    value={clientId}
-                    onChange={(e) => {
-                      setClientId(e.target.value);
-                    }}
-                  >
-                    <option>Select Client</option>
-                    {data.clients.map((client) => {
-                      return (
-                        <option key={client.id} value={client.id}>
-                          {client.name}
-                        </option>
-                      );
-                    })}
+                    <option value="completed">Completed</option>
                   </select>
                 </div>
 
@@ -162,4 +120,4 @@ const AddProjectModal = () => {
   );
 };
 
-export default AddProjectModal;
+export default EditProjectForm;
