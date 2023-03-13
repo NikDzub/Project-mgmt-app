@@ -2,7 +2,6 @@ import React from 'react';
 
 import Spinner from '../Spinner';
 import ClientRow from './ClientRow';
-import AddClientModal from '../AddClientModal';
 
 import { useQuery } from '@apollo/client';
 import { GET_CLIENTS } from '../../queries/clientQueries';
@@ -19,8 +18,6 @@ const Clients = () => {
 
   return (
     <>
-      <AddClientModal></AddClientModal>
-
       {!loading && !error && (
         <table className="table table-hover mt-3">
           <thead>
