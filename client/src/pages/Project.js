@@ -24,25 +24,37 @@ const Project = () => {
     return <p>Something went wrong</p>;
   }
 
+  let statusColor = 'text-danger';
+
+  switch (data.project.status) {
+    case 'In progress': {
+      statusColor = 'text-primary';
+      break;
+    }
+    case 'Completed': {
+      statusColor = 'text-success';
+    }
+  }
+
   return (
     <>
       {!loading && !error && (
-        <div className="card mx-auto p-5">
-          <Link to="/" className="btn btn-light btn-sm w-25 d-inline ms-auto">
+        <div className="card bg-light mx-auto p-4">
+          <Link to="/" className="btn btn-dark btn-sm w-auto d-inline ms-auto">
             Back
           </Link>
           <h1>{data.project.name}</h1>
           <p>{data.project.description}</p>
 
           <p>
-            Status: <strong>{data.project.status}</strong>
+            Status:{' '}
+            <strong className={`${statusColor}`}>{data.project.status}</strong>
           </p>
 
           <ClientInfo client={data.project.client}></ClientInfo>
 
-          <EditProjectForm project={data.project}></EditProjectForm>
-
-          <div className="d-flex">
+          <div className="d-flex flex-column">
+            <EditProjectForm project={data.project}></EditProjectForm>
             <DeleteProjectBtn projectId={id}></DeleteProjectBtn>
           </div>
         </div>

@@ -119,8 +119,8 @@ const AddProjectModal = () => {
                       setStatus(e.target.value);
                     }}
                   >
-                    <option value="new">Not Started</option>
-                    <option value="progress">In Progress</option>
+                    <option value="new">Not started</option>
+                    <option value="progress">In progress</option>
                     <option value="completed">Completed</option>
                   </select>
                 </div>

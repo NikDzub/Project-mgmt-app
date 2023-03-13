@@ -31,7 +31,7 @@ const EditProjectForm = ({ project }) => {
     <>
       <button
         type="button"
-        className="btn btn-primary btn-sm w-25 align-text-center mt-2"
+        className="btn btn-primary btn-sm w-25 align-text-center my-2"
         data-bs-toggle="modal"
         data-bs-target="#EditProjectModal"
       >
@@ -98,8 +98,8 @@ const EditProjectForm = ({ project }) => {
                       setStatus(e.target.value);
                     }}
                   >
-                    <option value="new">Not Started</option>
-                    <option value="progress">In Progress</option>
+                    <option value="new">Not started</option>
+                    <option value="progress">In progress</option>
                     <option value="completed">Completed</option>
                   </select>
                 </div>

@@ -18,7 +18,7 @@ const DeleteProjectbtn = ({ projectId }) => {
   return (
     <div
       onClick={deleteProject}
-      className="mt-2 btn btn-danger btn-sm w-25 d-inline mr-auto"
+      className="btn btn-danger btn-sm w-25 d-inline mr-auto"
     >
       Delete
     </div>

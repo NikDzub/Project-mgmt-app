@@ -5,12 +5,12 @@ import { FaMagento } from 'react-icons/fa';
 
 const Header = () => {
   return (
-    <nav className="navbar bg-light mb-4 p-0">
+    <nav className="navbar bg-dark mb-5 p-1">
       <div className="container">
         <a className="navbar-brand" href="/">
           <div className="d-flex">
             <FaMagento className={styles.logo}></FaMagento>
-            <div>Project MGMT</div>
+            <div className="text-white">Project MGMT</div>
           </div>
         </a>
       </div>

@@ -15,6 +15,9 @@ const Clients = () => {
   if (error) {
     return <p>Something went wrong</p>;
   }
+  if (data.clients.length < 1) {
+    return <p>No Clients</p>;
+  }
 
   return (
     <>
