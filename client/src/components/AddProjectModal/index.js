@@ -121,7 +121,7 @@ const AddProjectModal = () => {
                   >
                     <option value="new">Not Started</option>
                     <option value="progress">In Progress</option>
-                    <option value="complete">Completed</option>
+                    <option value="completed">Completed</option>
                   </select>
                 </div>
 

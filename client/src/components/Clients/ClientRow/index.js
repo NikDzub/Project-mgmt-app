@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useMutation } from '@apollo/client';
 import { DELETE_CLIENT } from '../../../mutations/clientMutations';
+import { GET_PROJECTS } from '../../../queries/projectQueries';
 import { GET_CLIENTS } from '../../../queries/clientQueries';
 
 import { FaTrash } from 'react-icons/fa';
@@ -9,7 +10,7 @@ import { FaTrash } from 'react-icons/fa';
 const ClientRow = ({ client }) => {
   const [DeleteClient] = useMutation(DELETE_CLIENT, {
     variables: { id: client.id },
-    refetchQueries: [{ query: GET_CLIENTS }],
+    refetchQueries: [{ query: GET_CLIENTS }, { query: GET_PROJECTS }],
   });
 
   return (
