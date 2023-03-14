@@ -20,7 +20,7 @@ const ClientRow = ({ client }) => {
       <td>{client.phone}</td>
       <td>
         <button onClick={DeleteClient} className="btn btn-danger btn-sm">
-          <FaTrash></FaTrash>
+          <FaTrash className="icon"></FaTrash>
         </button>
       </td>
     </tr>
